@@ -172,6 +172,7 @@ class _GameTile extends ConsumerWidget {
             false;
 
     return InkWell(
+      splashFactory: NoSplash.splashFactory,
       onTap: () {
         if (!ref.read(gameRunning)) {
           _resetGame(ref);
