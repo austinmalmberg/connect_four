@@ -162,10 +162,7 @@ class _GameTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool? activePlayer;
-    if (row == 0) {
-      activePlayer = ref.watch(turnProvider);
-    }
+    bool activePlayer = ref.watch(turnProvider);
 
     final bool isActiveColumn =
         ref.watch(hoverProvider.select((value) => value?.contains(index))) ??
@@ -195,8 +192,12 @@ class _GameTile extends ConsumerWidget {
         fit: StackFit.expand,
         children: [
           // to play indicator
-          if (activePlayer != null && isActiveColumn)
-            _GameChip(player: activePlayer),
+          if (row == 0 && isActiveColumn)
+            Positioned(
+              top: -30,
+              bottom: 30,
+              child: _GameChip(player: activePlayer),
+            ),
 
           // clips out a circle to expose the background or parent
           ClipPath(
@@ -228,8 +229,18 @@ class _GameTile extends ConsumerWidget {
 
           //
           if (isActiveColumn)
-            ColoredBox(
-              color: Colors.yellow.withOpacity(0.2),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Colors.transparent,
+                    Colors.yellow.withOpacity(0.07),
+                    Colors.yellow.withOpacity(0.2),
+                    Colors.yellow.withOpacity(0.07),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
             ),
         ],
       ),
