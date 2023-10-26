@@ -110,18 +110,20 @@ class GameScreen extends ConsumerWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 6,
-              child: _ConnectFour(),
-            ),
-            Expanded(
-              flex: 1,
-              child: _ScoreRow(),
-            ),
-          ],
+        body: const SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 6,
+                child: _ConnectFour(),
+              ),
+              Expanded(
+                flex: 1,
+                child: _ScoreRow(),
+              ),
+            ],
+          ),
         ),
       ),
     );
